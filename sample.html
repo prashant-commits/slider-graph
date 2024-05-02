@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Example</title>
+    <!-- Ensure you're using the minified production version of date-fns (v2.x.x is commonly compatible) -->
+<script src="https://unpkg.com/date-fns@2.30.0/index.js"></script>
+    <!-- The adapter version must be compatible with your version of date-fns -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0"></script>
+    <!-- Use the latest version of Chart.js 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+</head>
+
+<body>
+
+    <canvas id="timeSeriesChart"></canvas>
+
+    <script>
+        // Your provided data
+        const dataPoints = [
+                ["2023-05-03 22:00", 7795],
+                ["2023-05-03 23:00", 7801],
+                ["2023-05-04 00:00", 7789],
+                ["2023-05-04 01:00", 7799],
+                ["2023-05-04 02:00", 7801],
+                ["2023-05-04 03:00", 7793],
+                ["2023-05-04 04:00", 7805],
+                ["2023-05-04 05:00", 7807],
+                ["2023-05-04 06:00", 7801],
+                ["2023-05-04 07:00", 7813],
+                ["2023-05-04 08:00", 7803],
+                ["2023-05-04 09:00", 7817],
+                ["2023-05-04 10:00", 7810],
+                ["2023-05-04 11:00", 7821],
+                ["2023-05-04 12:00", 7811],
+                ["2023-05-04 13:00", 7825],
+                ["2023-05-04 14:00", 7823],
+                ["2023-05-04 15:00", 7829],
+                ["2023-05-04 16:00", 7819],
+                ["2023-05-04 17:00", 7831],
+                ["2023-05-04 18:00", 7835],
+                ["2023-05-04 19:00", 7827],
+                ["2023-05-04 20:00", 7840],
+                ["2023-05-04 21:00", 7830],
+                ["2023-05-04 22:00", 7844],
+                ["2023-05-04 23:00", 7836],
+                ["2023-05-05 00:00", 7849],
+                ["2023-05-05 01:00", 7841],
+                ["2023-05-05 02:00", 7855],
+                ["2023-05-05 03:00", 7853],
+                ["2023-05-05 04:00", 7847],
+                ["2023-05-05 05:00", 7861],
+                ["2023-05-05 06:00", 7859],
+                ["2023-05-05 07:00", 7850],
+                ["2023-05-05 08:00", 7866],
+                ["2023-05-05 09:00", 7864],
+                ["2023-05-05 10:00", 7868],
+                ["2023-05-05 11:00", 7857],
+            ]
+
+        // Extracting labels and data from the provided data
+        const labels = dataPoints.map(dp => dp[0]);
+        const data = dataPoints.map(dp => dp[1]);
+
+        // Getting the context of the canvas where the chart will be drawn
+        const ctx = document.getElementById('timeSeriesChart').getContext('2d');
+
+        // Creating the chart
+        const timeSeriesChart = new Chart(ctx, {
+            type: 'line', // Specify the chart type
+            data: {
+                labels: labels, // Set the labels from the data
+                datasets: [{
+                    label: 'Value over Time', // Name the data set
+                    data: data, // Set the data
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'time', // Specify the x-axis as time
+                        time: {
+                            parser: 'yyyy-MM-dd HH:mm', // Define the format of the input data
+                            unit: 'hour', // Define the unit to be used in the x-axis
+                        },
+                        title: {
+                            display: true,
+                            text: 'Date and Time'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false, // Start the y-axis from zero
+                        title: {
+                            display: true,
+                            text: 'Value'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

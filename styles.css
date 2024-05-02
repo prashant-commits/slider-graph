@@ -1,0 +1,126 @@
+:root {
+    --max-width: 100rem;
+    --battleship: 128 128 128;
+    --gray: 101 101 101;
+    --dark-gray: 21 21 21;
+    --blue: 8 123 225;
+    --white: 255 255 255;
+}
+
+html {
+    font-size: 4px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    color: rgb(var(--battleship));
+    font-family: 'Inter', sans-serif;
+}
+
+main {
+    padding-inline: max(calc(50vw - var(--max-width)/2), 5rem);
+    height: 100svh;
+    display: grid;
+    align-items: center;
+}
+
+
+.graph {
+    width: 100%;
+    position: relative;
+    cursor: none;
+    margin-bottom: 2rem;
+}
+
+svg.graph-svg g {
+    stroke-width: 2.2px;
+    stroke-linecap: round;
+    fill: none
+}
+
+svg.graph-svg .graph-svg-path-clip {
+    stroke: #0B69C1;
+    stroke-dasharray: 1;
+}
+
+@media (max-width: 432px) {}
+
+
+.graph-line-indicator {
+    --stop-distance: calc(100% - 2rem);
+    width: 0.5rem;
+    border-radius: 9999rem;
+    /* background-image: linear-gradient(rgb(var(--white) / 0.12) 0%, rgb(var(--white) / 0.12) var(--stop-distance), rgb(var(--white) / 0.0) 100%); */
+    background-color: rgb(var(--white) / 0.12);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 2rem;
+}
+
+.graph-line-indicator-y {
+    padding: 1.5rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 0 1px rgb(var(--dark-gray));
+    color: rgba(var(--white)/ 0.80);
+    backdrop-filter: blur(2px);
+    text-align: center;
+    font-size: 3rem;
+    background: #000;
+    z-index: 20;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    white-space: nowrap;
+    position: absolute;
+    top: -12rem;
+    margin-inline: auto;
+}
+
+.graph-line-indicator-x {
+    color: rgb(var(--grey));
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 100%;
+    position: absolute;
+    bottom: -8rem;
+    margin-inline: auto;
+    white-space: nowrap;
+    /* Set display none if don't want indicator with the line */
+    /* display: none; */
+}
+
+.graph-dot-indicator {
+    width: 3.5rem;
+    height: 3.5rem;
+    position: absolute;
+    box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px, rgba(0, 0, 0, 0.12) 0px 0px 8px 2px;
+    border-radius: 9999rem;
+    color: rgb(var(--blue));
+    background-color: currentColor;
+    offset-path: path(var(--d));
+    fill: currentColor;
+    stroke: white;
+    stroke-width: 2px
+}
+
+.graph-x-label {
+    padding-top: 2rem;
+    border-top: 0.25rem solid rgb(var(--dark-gray));
+    display: flex;
+    justify-content: space-around;
+    color: rgb(var(--gray));
+    text-align: center;
+    font-size: 3.25rem;
+    font-weight: 500;
+    line-height: 100%;
+    /* Set display none if don't want the static x axis label */
+    display: none;
+}
